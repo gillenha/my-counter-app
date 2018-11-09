@@ -3,9 +3,16 @@ import Counter from "./counter";
 
 class ListOfCounters extends Component {
   render() {
-    const { counters, onIncrease, onDecrease, onDelete } = this.props;
+    const {
+      counters,
+      onIncrease,
+      onDecrease,
+      onDelete,
+      onReset,
+      onDb
+    } = this.props;
     return (
-      <div>
+      <div className="container">
         {counters.map(counter => (
           <Counter
             key={counter.id}
@@ -16,6 +23,18 @@ class ListOfCounters extends Component {
             counter={counter}
           />
         ))}
+        <p>
+          Reset all counters to zero
+          <button className="btn btn-primary m-2" onClick={onReset}>
+            Reset
+          </button>
+        </p>
+        <p>
+          IT'S OVER 9,000!
+          <button className="btn btn-dark m-2" onClick={onDb}>
+            PUNCH IT!
+          </button>
+        </p>
       </div>
     );
   }

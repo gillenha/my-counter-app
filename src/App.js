@@ -15,17 +15,17 @@ class App extends Component {
 
   handleIncrease = counter => {
     const counters = [...this.state.counters];
-    const index = counters.indexOf(counter);
-    counters[index] = { ...counter };
-    counters[index].value++;
+    const i = counters.indexOf(counter);
+    counters[i] = { ...counter };
+    counters[i].value++;
     this.setState({ counters });
   };
 
   handleDecrease = counter => {
     const counters = [...this.state.counters];
-    const index = counters.indexOf(counter);
-    counters[index] = { ...counter };
-    counters[index].value--;
+    const i = counters.indexOf(counter);
+    counters[i] = { ...counter };
+    counters[i].value--;
     this.setState({ counters });
   };
 
@@ -34,11 +34,33 @@ class App extends Component {
     this.setState({ counters });
   };
 
+  handleReset = () => {
+    const allValuesZero = this.state.counters.map(reset => {
+      reset.value = 0;
+      return reset;
+    });
+    this.setState({
+      counters: allValuesZero
+    });
+  };
+
+  handleDragonBall = () => {
+    const vegeta = this.state.counters.map(punchIt => {
+      punchIt.value = 9000;
+      return punchIt;
+    });
+    this.setState({
+      counters: vegeta
+    });
+  };
+
   render() {
     return (
       <div>
         <ListOfCounters
           counters={this.state.counters}
+          onReset={this.handleReset}
+          onDb={this.handleDragonBall}
           onIncrease={this.handleIncrease}
           onDecrease={this.handleDecrease}
           onDelete={this.handleDelete}
