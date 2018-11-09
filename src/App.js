@@ -9,28 +9,29 @@ class App extends Component {
       { id: 1, value: 0 },
       { id: 2, value: 4 },
       { id: 3, value: 0 },
-      { id: 4, value: 0 }
+      { id: 4, value: 1 }
     ]
   };
 
-  handleIncrease = () => {
-    const counter = this.state.value;
-    this.setState({
-      value: counter + 1
-    });
-    console.log("you clicked ", counter);
+  handleIncrease = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value++;
+    this.setState({ counters });
   };
 
-  handleDecrease = () => {
-    const counter = this.state.value;
-    this.setState({
-      value: counter - 1
-    });
-    console.log("you clicked ", counter);
+  handleDecrease = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value--;
+    this.setState({ counters });
   };
 
-  handleDelete = () => {
-    //do something
+  handleDelete = counterId => {
+    const counters = this.state.counters.filter(item => item.id !== counterId);
+    this.setState({ counters });
   };
 
   render() {
